@@ -1,8 +1,8 @@
 import 'package:dailytodo/models/todo.dart';
+import 'package:dailytodo/widgets/confirmation_slider.dart';
 import 'package:dailytodo/widgets/constants.dart';
 import 'package:dailytodo/widgets/priority_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:slide_to_confirm/slide_to_confirm.dart';
 
 class FirstTodoWidget extends StatelessWidget {
   final Function onConfirmed;
@@ -45,21 +45,9 @@ class FirstTodoWidget extends StatelessWidget {
               top: 40.0,
               bottom: 10,
             ),
-            child: ConfirmationSlider(
-              onConfirmation: onConfirmed,
-              foregroundColor: kaccentColor,
-              text: "Slide to Finish",
-              textStyle: const TextStyle(
-                color: Color(0xFF616161),
-                fontWeight: FontWeight.w600,
-              ),
-              shadow: const BoxShadow(
-                blurRadius: 5,
-                spreadRadius: 0.5,
-                color: Colors.black26,
-              ),
-              backgroundColor: Colors.grey[900],
+            child: confirmationSlider(
               height: 55,
+              onConfirmed: onConfirmed,
             ),
           ),
         ],

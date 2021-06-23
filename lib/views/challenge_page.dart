@@ -1,14 +1,13 @@
 import 'package:dailytodo/database/database.dart';
 import 'package:dailytodo/models/challenge.dart';
 import 'package:dailytodo/views/add_challenge_page.dart';
+import 'package:dailytodo/widgets/confirmation_slider.dart';
 import 'package:dailytodo/widgets/constants.dart';
 import 'package:dailytodo/widgets/floatingactionButton.dart';
 import 'package:dailytodo/widgets/no_todo_widget.dart';
-import 'package:dailytodo/widgets/priority_widget.dart';
 import 'package:dailytodo/widgets/snackbar_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:slide_to_confirm/slide_to_confirm.dart';
 
@@ -18,6 +17,46 @@ class ChallengePage extends StatefulWidget {
 }
 
 class _ChallengePageState extends State<ChallengePage> {
+  void confirmHabit(Challenge challenge) async {
+    if (challenge.doneDate.difference(DateTime.now()) >= Duration(days: 2)) {
+      challenge.completedDays = 0;
+      challenge.doneDate = DateTime.now().subtract(Duration(days: 1));
+      await DatabaseService.instance.updateChallenge(challenge);
+      ScaffoldMessenger.of(context).showSnackBar(
+        snackBarWidget(
+          color: Colors.red[400],
+          title: "Sorry you've missed your habit for more than 2 days",
+        ),
+      );
+    }
+
+    if (challenge.doneDate.day != DateTime.now().day) {
+      challenge.completedDays += 1;
+      challenge.doneDate = DateTime.now();
+
+      if (challenge.completedDays == challenge.totalDays) {
+        challenge.isDone = 1;
+      }
+      await DatabaseService.instance.updateChallenge(challenge);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        snackBarWidget(
+          color: Colors.green[400],
+          title: "Well Done! Keep on Going and keep yourself on Track",
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        snackBarWidget(
+          color: Colors.red[400],
+          title: "You've already marked your Today's Habit",
+        ),
+      );
+    }
+
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -138,7 +177,7 @@ class _ChallengePageState extends State<ChallengePage> {
                                           ),
                                         ),
                                         TextSpan(
-                                          text: " Tasks left",
+                                          text: " Days left",
                                         ),
                                       ]),
                                 ),
@@ -172,72 +211,10 @@ class _ChallengePageState extends State<ChallengePage> {
                                         top: 30.0,
                                         bottom: 10,
                                       ),
-                                      child: ConfirmationSlider(
-                                        onConfirmation: () async {
-                                          if (challenge.doneDate
-                                                  .difference(DateTime.now()) >=
-                                              Duration(days: 2)) {
-                                            challenge.completedDays = 0;
-                                            challenge.doneDate = DateTime.now()
-                                                .subtract(Duration(days: 1));
-                                            await DatabaseService.instance
-                                                .updateChallenge(challenge);
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              snackBarWidget(
-                                                color: Colors.red[400],
-                                                title:
-                                                    "Sorry you've missed your habit for more than 2 days",
-                                              ),
-                                            );
-                                          }
-
-                                          if (challenge.doneDate.day !=
-                                              DateTime.now().day) {
-                                            challenge.completedDays += 1;
-                                            challenge.doneDate = DateTime.now();
-
-                                            if (challenge.completedDays ==
-                                                challenge.totalDays) {
-                                              challenge.isDone = 1;
-                                            }
-                                            await DatabaseService.instance
-                                                .updateChallenge(challenge);
-
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              snackBarWidget(
-                                                color: Colors.green[400],
-                                                title:
-                                                    "Well Done! Keep on Going and keep yourself on Track",
-                                              ),
-                                            );
-                                          } else {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              snackBarWidget(
-                                                color: Colors.red[400],
-                                                title:
-                                                    "You've already marked your Today's Habit",
-                                              ),
-                                            );
-                                          }
-
-                                          setState(() {});
-                                        },
-                                        foregroundColor: kaccentColor,
-                                        text: "Slide to Finish",
-                                        textStyle: const TextStyle(
-                                          color: Color(0xFF616161),
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                        shadow: const BoxShadow(
-                                          blurRadius: 5,
-                                          spreadRadius: 0.5,
-                                          color: Colors.black26,
-                                        ),
-                                        backgroundColor: Colors.grey[900],
+                                      child: confirmationSlider(
                                         height: 50,
+                                        onConfirmed: () =>
+                                            confirmHabit(challenge),
                                       ),
                                     )
                                   : Container(
@@ -252,7 +229,7 @@ class _ChallengePageState extends State<ChallengePage> {
                   )
                 : NoTodoWidget(
                     height: getHeight(context),
-                    image: "assets/images/timeline.png",
+                    image: "assets/images/soon1.png",
                     ismain: false,
                     title:
                         "No Challenges added yet!\nAdd it to make a get to the right track.",

@@ -21,7 +21,7 @@ class TimelinePage extends StatelessWidget {
         location: AddTimeLinePage.id,
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: 20,
         ),
         child: FutureBuilder(
@@ -34,7 +34,7 @@ class TimelinePage extends StatelessWidget {
             }
             return snapshot.data.length > 0
                 ? ListView.builder(
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                       top: 20,
                       bottom: 100,
                     ),
@@ -45,7 +45,7 @@ class TimelinePage extends StatelessWidget {
 
                       final Timeline timeline = snapshot.data[index - 1];
                       return Container(
-                        margin: EdgeInsets.symmetric(vertical: 15),
+                        margin: const EdgeInsets.symmetric(vertical: 15),
                         alignment: Alignment.center,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -101,7 +101,7 @@ class TimelinePage extends StatelessWidget {
                                   ),
                                 ),
                                 child: Container(
-                                  margin: EdgeInsets.only(
+                                  margin: const EdgeInsets.only(
                                     top: 10,
                                     bottom: 10,
                                     left: 10,

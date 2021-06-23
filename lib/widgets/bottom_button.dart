@@ -10,7 +10,7 @@ class BottomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(
+      margin: const EdgeInsets.only(
         bottom: 50,
         left: 40,
         right: 40,
@@ -24,7 +24,7 @@ class BottomButton extends StatelessWidget {
             ? Navigator.pop(context)
             : Navigator.pushNamed(context, AskNamePage.id),
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 16),
+          padding: const EdgeInsets.symmetric(vertical: 16),
           alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
@@ -32,7 +32,7 @@ class BottomButton extends StatelessWidget {
           ),
           child: Text(
             "Tap to Continue",
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 16,
               fontFamily: 'Ubuntu',

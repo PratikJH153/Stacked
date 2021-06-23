@@ -36,7 +36,7 @@ class _TodoListState extends State<TodoList> {
                     Provider.of<TodoData>(context, listen: false)
                         .updateOrder(oldIndex, newIndex);
                   },
-                  padding: EdgeInsets.only(bottom: 100),
+                  padding: const EdgeInsets.only(bottom: 100),
                   shrinkWrap: true,
                   itemCount:
                       Provider.of<TodoData>(context, listen: false).todoCount,
@@ -76,8 +76,8 @@ class _TodoListState extends State<TodoList> {
                       key: ValueKey(todo),
                       child: Container(
                         key: ValueKey(todo),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 15, vertical: 5),
                         decoration: BoxDecoration(
                           color: kprimaryColor,
                           // borderRadius: BorderRadius.circular(10),

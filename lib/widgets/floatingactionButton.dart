@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 SizedBox floatingActionButton({
-  BuildContext context,
-  var location,
-  IconData icon,
-  Color backgroundColor,
+  @required BuildContext context,
+  @required var location,
+  @required IconData icon,
+  @required Color backgroundColor,
 }) {
   return SizedBox(
     height: 60,

@@ -27,11 +27,11 @@ class TabViewPage extends StatelessWidget {
         child: Scaffold(
           primary: true,
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(135),
+            preferredSize: const Size.fromHeight(135),
             child: AppBar(
               backgroundColor: Colors.white.withOpacity(0.06),
               flexibleSpace: Padding(
-                padding: EdgeInsets.only(
+                padding: const EdgeInsets.only(
                   left: 22,
                   right: 22,
                   top: 15,
@@ -81,7 +81,7 @@ class TabViewPage extends StatelessWidget {
               ),
               bottom: TabBar(
                 indicatorColor: kaccentColor,
-                tabs: [
+                tabs: const [
                   Tab(icon: Icon(CupertinoIcons.rocket)),
                   Tab(icon: Icon(CupertinoIcons.timer)),
                   Tab(icon: Icon(CupertinoIcons.calendar)),

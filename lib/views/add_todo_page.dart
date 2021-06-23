@@ -3,10 +3,12 @@ import 'package:dailytodo/models/todo.dart';
 import 'package:dailytodo/helper/todo_data.dart';
 import 'package:dailytodo/views/todo_list_page.dart';
 import 'package:dailytodo/views/wrapper.dart';
+import 'package:dailytodo/widgets/app_bar.dart';
 import 'package:dailytodo/widgets/constants.dart';
 import 'package:dailytodo/widgets/floatingactionButton.dart';
 import 'package:dailytodo/widgets/priority_widget.dart';
 import 'package:dailytodo/widgets/snackbar_widget.dart';
+import 'package:dailytodo/widgets/textFields.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -29,11 +31,11 @@ class _AddTodoPageState extends State<AddTodoPage> {
   _submit() async {
     if (_titleController.text.trim().isNotEmpty &&
         _titleController.text.trim().length > 3) {
-      Todo todo = Todo(
-        title: _titleController.text.trim(),
-        priority: _priority,
-      );
       if (widget.todo == null) {
+        Todo todo = Todo(
+          title: _titleController.text.trim(),
+          priority: _priority,
+        );
         todo.status = 0;
         await DatabaseService.instance.insertTodo(todo).then((value) async {
           await Provider.of<TodoData>(context, listen: false)
@@ -41,13 +43,12 @@ class _AddTodoPageState extends State<AddTodoPage> {
         }); //Todo(title:jkhsadfkjds)
 
       } else {
-        todo.id = widget.todo.id;
-        todo.title = _titleController.text.trim();
-        todo.priority = _priority;
-        todo.status = widget.todo.status;
+        widget.todo.title = _titleController.text.trim();
+        widget.todo.priority = _priority;
 
-        await Provider.of<TodoData>(context, listen: false).updateTodo(todo);
-        await DatabaseService.instance.updateTodo(todo);
+        await Provider.of<TodoData>(context, listen: false)
+            .updateTodo(widget.todo);
+        await DatabaseService.instance.updateTodo(widget.todo);
       }
       Navigator.of(context)
           .pushNamedAndRemoveUntil(Wrapper.id, (Route<dynamic> route) => false);
@@ -90,74 +91,45 @@ class _AddTodoPageState extends State<AddTodoPage> {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 20),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                appBar(
+                  context: context,
+                  func: _submit,
+                  title: "Add your Todo",
+                ),
+                SizedBox(
+                  height: 40,
+                ),
                 Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          IconButton(
-                            iconSize: 25,
-                            icon: Icon(CupertinoIcons.arrow_turn_up_left),
-                            onPressed: () => Navigator.pop(context),
+                  child: Row(
+                    children: priorities.entries
+                        .map(
+                          (entry) => priorityWidget(
+                            color: entry.key == _priority
+                                ? entry.value
+                                : Colors.white.withOpacity(0.1),
+                            title: entry.key,
+                            onTap: () {
+                              setState(
+                                () {
+                                  _priority = entry.key;
+                                },
+                              );
+                            },
                           ),
-                          Text(
-                            "Add Todo",
-                            style: kTextFieldHintTextStyle,
-                          ),
-                          Spacer(),
-                          IconButton(
-                            iconSize: 30,
-                            icon: Icon(CupertinoIcons.checkmark_alt),
-                            onPressed: _submit,
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 40,
-                      ),
-                      Container(
-                        child: Row(
-                          children: priorities.entries
-                              .map(
-                                (entry) => priorityWidget(
-                                  color: entry.key == _priority
-                                      ? entry.value
-                                      : Colors.white.withOpacity(0.1),
-                                  title: entry.key,
-                                  onTap: () {
-                                    setState(
-                                      () {
-                                        _priority = entry.key;
-                                      },
-                                    );
-                                  },
-                                ),
-                              )
-                              .toList(),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 40,
-                      ),
-                      Container(
-                        decoration: containerDecoration,
-                        child: TextField(
-                          autofocus: false,
-                          keyboardType: TextInputType.text,
-                          autocorrect: true,
-                          textCapitalization: TextCapitalization.sentences,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(left: 12),
-                            border: InputBorder.none,
-                            hintText: "Enter the task",
-                            hintStyle: kHintTextFieldTextStyle,
-                          ),
-                          controller: _titleController,
-                        ),
-                      ),
-                    ],
+                        )
+                        .toList(),
+                  ),
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+                Container(
+                  decoration: containerDecoration,
+                  child: TextFieldWidget(
+                    hintText: "Enter the task",
+                    textEditingController: _titleController,
                   ),
                 ),
               ],

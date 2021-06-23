@@ -21,7 +21,7 @@ class TapDayWidget extends StatelessWidget {
       onLongPress: notDone,
       child: Container(
         alignment: Alignment.center,
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: value == "null"
               ? Color(0xFF151517)

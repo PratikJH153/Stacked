@@ -20,7 +20,6 @@ class AskNamePage extends StatelessWidget {
       _form.save();
       DisplayName.setName(_nameController.text.trim());
       TimeLinePref.setday(1);
-      // OrderData.setOrder([]);
       await DatabaseService.instance.insertDay();
       Navigator.of(context)
           .pushNamedAndRemoveUntil(Wrapper.id, (Route<dynamic> route) => false);
@@ -63,9 +62,11 @@ class AskNamePage extends StatelessWidget {
                       SizedBox(
                         height: 30,
                       ),
-                      Image.asset(
-                        "assets/images/info.png",
-                        width: width * 0.7,
+                      Flexible(
+                        child: Image.asset(
+                          "assets/images/info.png",
+                          width: width * 0.7,
+                        ),
                       )
                     ],
                   ),
@@ -103,7 +104,8 @@ class AskNamePage extends StatelessWidget {
                                 textCapitalization:
                                     TextCapitalization.sentences,
                                 decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.only(left: 12),
+                                  contentPadding:
+                                      const EdgeInsets.only(left: 12),
                                   border: InputBorder.none,
                                   hintText: "Enter your name",
                                   hintStyle: kHintTextFieldTextStyle,

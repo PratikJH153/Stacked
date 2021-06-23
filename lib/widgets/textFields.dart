@@ -22,7 +22,7 @@ class TextFieldWidget extends StatelessWidget {
       autocorrect: true,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.only(left: 12),
+        contentPadding: const EdgeInsets.only(left: 12),
         border: InputBorder.none,
         hintText: hintText,
         hintStyle: kHintTextFieldTextStyle,

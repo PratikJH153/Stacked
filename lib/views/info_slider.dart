@@ -18,8 +18,8 @@ class _InfoSliderState extends State<InfoSlider> {
 
   Widget _buildPageIndicator(bool isCurrentPage) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 200),
-      margin: EdgeInsets.symmetric(horizontal: 5),
+      duration: const Duration(milliseconds: 200),
+      margin: const EdgeInsets.symmetric(horizontal: 5),
       height: isCurrentPage ? 8 : 6.0,
       width: isCurrentPage ? 18.0 : 6.0,
       decoration: BoxDecoration(
@@ -39,7 +39,7 @@ class _InfoSliderState extends State<InfoSlider> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 50),
+      margin: const EdgeInsets.only(top: 50),
       height: getHeight(context) * 0.52,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

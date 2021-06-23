@@ -22,7 +22,7 @@ class TodoListPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.only(left: 20, right: 20, top: 20),
+          padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -81,7 +81,7 @@ class TodoListPage extends StatelessWidget {
               ),
               LinearPercentIndicator(
                 backgroundColor: kprimaryColor,
-                linearGradient: LinearGradient(colors: [
+                linearGradient: LinearGradient(colors: const [
                   Color(0xFF4797ff),
                   Color(0xFF643dff),
                   Color(0xFFff7092),
@@ -94,7 +94,7 @@ class TodoListPage extends StatelessWidget {
                 animation: true,
                 animateFromLastPercent: true,
                 animationDuration: 1500,
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   horizontal: 5,
                   vertical: 15,
                 ),
@@ -112,101 +112,3 @@ class TodoListPage extends StatelessWidget {
     );
   }
 }
-
-// FutureBuilder(
-//                 future: todoList,
-//                 builder: (context, snapshot) {
-//                   if (!snapshot.hasData) {
-//                     return Container();
-//                   }
-
-//                   final int completedTodo = snapshot.data
-//                       .where((Todo todo) => todo.status == 1)
-//                       .toList()
-//                       .length;
-
-//                   return Expanded(
-//                     child: ListView.builder(
-//                       shrinkWrap: true,
-//                       // onReorder: (oldIndex, newIndex) => setState(() {}),
-//                       itemBuilder: (context, index) {
-//                         if (snapshot.data.length == 0) {
-//                           return Container();
-//                         }
-//                         if (index == 0) {
-//                           return RichText(
-//                             text: TextSpan(
-//                               children: <TextSpan>[
-//                                 TextSpan(
-//                                   text: "You have ",
-//                                   style: TextStyle(
-//                                       color: Colors.grey,
-//                                       fontWeight: FontWeight.w400,
-//                                       fontSize: 17),
-//                                 ),
-//                                 TextSpan(
-//                                   text:
-//                                       " $completedTodo/${snapshot.data.length} ",
-//                                   style: TextStyle(
-//                                       color: kcanvasColor,
-//                                       fontWeight: FontWeight.bold,
-//                                       letterSpacing: 1.2,
-//                                       fontSize: 18),
-//                                 ),
-//                                 TextSpan(
-//                                   text: " tasks to complete",
-//                                   style: TextStyle(
-//                                       color: Colors.grey,
-//                                       fontWeight: FontWeight.w400,
-//                                       fontSize: 17),
-//                                 ),
-//                               ],
-//                             ),
-//                           );
-//                         }
-//                         var todo = snapshot.data[index - 1];
-//                         return Slidable(
-//                           actionPane: SlidableDrawerActionPane(),
-//                           secondaryActions: [
-//                             IconButton(
-//                               icon: Icon(CupertinoIcons.pencil_outline),
-//                               onPressed: () {},
-//                             ),
-//                             IconButton(
-//                               icon: Icon(CupertinoIcons.delete_simple),
-//                               onPressed: () {},
-//                             ),
-//                           ],
-//                           key: ValueKey(todo),
-//                           child: Container(
-//                             padding: EdgeInsets.symmetric(
-//                                 horizontal: 15, vertical: 5),
-//                             decoration: BoxDecoration(
-//                               color: kprimaryColor,
-//                               // borderRadius: BorderRadius.circular(10),
-//                               border: Border(
-//                                 left: BorderSide(
-//                                   color: priorities[todo.priority],
-//                                   width: 3,
-//                                 ),
-//                               ),
-//                             ),
-//                             margin: EdgeInsets.only(top: 20),
-//                             child: ListTile(
-//                               key: ValueKey(todo),
-//                               title: Text(
-//                                 todo.title,
-//                                 style: kTextFieldHintTextStyle.copyWith(
-//                                   fontSize: 16,
-//                                 ),
-//                               ),
-//                               trailing: Icon(Icons.drag_handle_rounded),
-//                             ),
-//                           ),
-//                         );
-//                       },
-//                       itemCount: 1 + snapshot.data.length,
-//                     ),
-//                   );
-//                 },
-//               ),

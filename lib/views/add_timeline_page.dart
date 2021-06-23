@@ -1,7 +1,9 @@
 import 'package:dailytodo/database/database.dart';
 import 'package:dailytodo/models/timeline.dart';
 import 'package:dailytodo/views/wrapper.dart';
+import 'package:dailytodo/widgets/app_bar.dart';
 import 'package:dailytodo/widgets/constants.dart';
+import 'package:dailytodo/widgets/floatingactionButton.dart';
 import 'package:dailytodo/widgets/priority_widget.dart';
 import 'package:dailytodo/widgets/snackbar_widget.dart';
 import 'package:dailytodo/widgets/textFields.dart';
@@ -34,21 +36,20 @@ class _AddTimeLinePageState extends State<AddTimeLinePage> {
   _submit() async {
     if (_titleController.text.trim().isNotEmpty &&
         _titleController.text.trim().length > 3) {
-      Timeline timeline = Timeline(
-        title: _titleController.text.trim(),
-        des: _desController.text.trim(),
-        dateTime: DateTime.now(),
-        day: day,
-      );
       if (widget.timeline == null) {
+        Timeline timeline = Timeline(
+          title: _titleController.text.trim(),
+          des: _desController.text.trim(),
+          dateTime: DateTime.now(),
+          day: day,
+        );
         await DatabaseService.instance.insertTimeLine(timeline);
         TimeLinePref.setday(day + 1);
       } else {
-        timeline.id = widget.timeline.id;
-        timeline.title = _titleController.text.trim();
-        timeline.des = _desController.text.trim();
+        widget.timeline.title = _titleController.text.trim();
+        widget.timeline.des = _desController.text.trim();
 
-        await DatabaseService.instance.updateTimeline(timeline);
+        await DatabaseService.instance.updateTimeline(widget.timeline);
       }
 
       Navigator.of(context)
@@ -78,73 +79,47 @@ class _AddTimeLinePageState extends State<AddTimeLinePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: SizedBox(
-        height: 60,
-        width: 60,
-        child: FloatingActionButton(
-          onPressed: () => Navigator.pop(context),
-          backgroundColor: Colors.grey[900],
-          child: Icon(
-            CupertinoIcons.clear,
-            color: Colors.white,
-          ),
-        ),
+      floatingActionButton: floatingActionButton(
+        context: context,
+        location: AddTimeLinePage.id,
+        icon: CupertinoIcons.calendar_badge_plus,
+        backgroundColor: kprimaryColor,
       ),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 20),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                appBar(
+                  context: context,
+                  title: "Add your Day",
+                  func: _submit,
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+                dayWidget(
+                  title: "Day $day",
+                ),
+                SizedBox(
+                  height: 25,
+                ),
                 Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          IconButton(
-                            iconSize: 25,
-                            icon: Icon(CupertinoIcons.arrow_turn_up_left),
-                            onPressed: () => Navigator.pop(context),
-                          ),
-                          Text(
-                            "Add your Day",
-                            style: kTextFieldHintTextStyle,
-                          ),
-                          Spacer(),
-                          IconButton(
-                            iconSize: 30,
-                            icon: Icon(CupertinoIcons.checkmark_alt),
-                            onPressed: _submit,
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 40,
-                      ),
-                      dayWidget(
-                        title: "Day $day",
-                      ),
-                      SizedBox(
-                        height: 25,
-                      ),
-                      Container(
-                        decoration: containerDecoration,
-                        child: TextFieldWidget(
-                          hintText: "Title",
-                          textEditingController: _titleController,
-                        ),
-                      ),
-                      Container(
-                        height: 80,
-                        decoration: containerDecoration,
-                        margin: EdgeInsets.only(top: 20),
-                        child: TextFieldWidget(
-                          hintText: "Description",
-                          textEditingController: _desController,
-                        ),
-                      ),
-                    ],
+                  decoration: containerDecoration,
+                  child: TextFieldWidget(
+                    hintText: "Title",
+                    textEditingController: _titleController,
+                  ),
+                ),
+                Container(
+                  height: 80,
+                  decoration: containerDecoration,
+                  margin: const EdgeInsets.only(top: 20),
+                  child: TextFieldWidget(
+                    hintText: "Description",
+                    textEditingController: _desController,
                   ),
                 ),
               ],

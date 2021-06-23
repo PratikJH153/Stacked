@@ -15,12 +15,12 @@ class _CalendarPageState extends State<CalendarPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(20),
+      margin: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.only(top: 10, bottom: 20, left: 10),
+            padding: const EdgeInsets.only(top: 10, bottom: 20, left: 10),
             child: Text(
               "Your Daily Tracker",
               style: kTextFieldHintTextStyle,
@@ -39,7 +39,7 @@ class _CalendarPageState extends State<CalendarPage> {
                     ? Center(
                         child: Container(
                           alignment: Alignment.center,
-                          padding: EdgeInsets.all(20),
+                          padding: const EdgeInsets.all(20),
                           child: NoTodoWidget(
                             height: getHeight(context),
                             image: "assets/images/soon1.png",
@@ -96,7 +96,3 @@ class _CalendarPageState extends State<CalendarPage> {
     );
   }
 }
-
- // Expanded(
-            //   child:
-            // ),

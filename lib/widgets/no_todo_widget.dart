@@ -8,7 +8,12 @@ class NoTodoWidget extends StatelessWidget {
   final String title;
   final String image;
 
-  NoTodoWidget({this.height, this.ismain = true, this.title, this.image});
+  NoTodoWidget({
+    this.height,
+    this.ismain = true,
+    this.title,
+    this.image,
+  });
 
   @override
   Widget build(BuildContext context) {
