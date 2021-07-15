@@ -172,6 +172,12 @@ class DatabaseService {
     return result;
   }
 
+  Future<int> deleteAllChallenges() async {
+    Database db = await this.database;
+    final int result = await db.delete(challengeTable);
+    return result;
+  }
+
   Future<List<Map<String, dynamic>>> getChallengeMap() async {
     Database db = await this.database;
     final List<Map<String, dynamic>> result = await db.query(challengeTable);
@@ -208,6 +214,12 @@ class DatabaseService {
       where: '$colId = ?',
       whereArgs: [day.id],
     );
+    return result;
+  }
+
+  Future<int> deleteAllDays() async {
+    Database db = await this.database;
+    final int result = await db.delete(timelineTable);
     return result;
   }
 

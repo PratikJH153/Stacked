@@ -6,6 +6,7 @@ import 'package:dailytodo/widgets/floatingactionButton.dart';
 import 'package:dailytodo/widgets/no_todo_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 
 class TimelinePage extends StatelessWidget {
@@ -35,8 +36,8 @@ class TimelinePage extends StatelessWidget {
             return snapshot.data.length > 0
                 ? ListView.builder(
                     padding: const EdgeInsets.only(
-                      top: 20,
                       bottom: 100,
+                      top: 10,
                     ),
                     itemBuilder: (context, index) {
                       if (index == 0) {
@@ -44,62 +45,73 @@ class TimelinePage extends StatelessWidget {
                       }
 
                       final Timeline timeline = snapshot.data[index - 1];
-                      return Container(
-                        margin: const EdgeInsets.symmetric(vertical: 15),
-                        alignment: Alignment.center,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: RichText(
-                                    textAlign: TextAlign.center,
-                                    text: TextSpan(
-                                      children: [
-                                        TextSpan(
-                                          text:
-                                              "${formattedString.format(timeline.dateTime)}\n",
-                                          style:
-                                              kHintTextFieldTextStyle.copyWith(
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                          text: "Day ${timeline.day}\n",
-                                          style:
-                                              kTextFieldHintTextStyle.copyWith(
-                                            fontSize: 18,
-                                            height: 1.5,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  width: 10,
-                                  height: 10,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: kcanvasColor,
-                                  ),
-                                ),
-                              ],
+                      return Slidable(
+                        actionPane: SlidableDrawerActionPane(),
+                        closeOnScroll: true,
+                        secondaryActions: [
+                          IconButton(
+                            icon: Icon(
+                              CupertinoIcons.pencil_outline,
+                              color: Colors.white,
                             ),
-                            Expanded(
-                              child: GestureDetector(
-                                onLongPress: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => AddTimeLinePage(
-                                      timeline: timeline,
+                            onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AddTimeLinePage(
+                                  timeline: timeline,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                          alignment: Alignment.center,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: RichText(
+                                      textAlign: TextAlign.center,
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text:
+                                                "${formattedString.format(timeline.dateTime)}\n",
+                                            style: kHintTextFieldTextStyle
+                                                .copyWith(
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                          TextSpan(
+                                            text: "Day ${timeline.day}\n",
+                                            style: kTextFieldHintTextStyle
+                                                .copyWith(
+                                              fontSize: 18,
+                                              height: 1.5,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
+                                  Container(
+                                    width: 10,
+                                    height: 10,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: kcanvasColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Expanded(
                                 child: Container(
                                   margin: const EdgeInsets.only(
                                     top: 10,
@@ -135,8 +147,8 @@ class TimelinePage extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       );
                     },
@@ -145,7 +157,6 @@ class TimelinePage extends StatelessWidget {
                 : NoTodoWidget(
                     height: getHeight(context),
                     image: "assets/images/timeline.png",
-                    ismain: false,
                     title:
                         "No Time line added yet!\nAdd it to make a track of your days.",
                   );

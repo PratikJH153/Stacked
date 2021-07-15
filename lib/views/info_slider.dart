@@ -40,7 +40,7 @@ class _InfoSliderState extends State<InfoSlider> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 50),
-      height: getHeight(context) * 0.52,
+      height: getHeight(context) * 0.55,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -78,6 +78,7 @@ class _InfoSliderState extends State<InfoSlider> {
             ),
           ),
           Container(
+            margin: EdgeInsets.only(top: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -106,11 +107,11 @@ class SlideTile extends StatelessWidget {
       alignment: Alignment.center,
       child: Column(
         children: [
-          Image.asset(
-            imagePath,
-            height: 250,
-            width: 250,
-            fit: BoxFit.cover,
+          Flexible(
+            child: Image.asset(
+              imagePath,
+              fit: BoxFit.cover,
+            ),
           ),
           SizedBox(
             height: 20,

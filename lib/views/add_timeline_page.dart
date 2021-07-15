@@ -100,8 +100,38 @@ class _AddTimeLinePageState extends State<AddTimeLinePage> {
                 SizedBox(
                   height: 40,
                 ),
-                dayWidget(
-                  title: "Day $day",
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    dayWidget(
+                      title: "Day $day",
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        await DatabaseService.instance.deleteAllDays();
+                        TimeLinePref.setday(0);
+                        return Navigator.of(context).pushNamedAndRemoveUntil(
+                            Wrapper.id, (Route<dynamic> route) => false);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 18,
+                          vertical: 10,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.red.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Text(
+                          "Reset",
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 25,

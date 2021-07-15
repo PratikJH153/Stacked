@@ -23,7 +23,7 @@ const kIntroTextStyle = TextStyle(
 
 const kDesTextStyle = TextStyle(
   fontSize: 12,
-  fontWeight: FontWeight.w500,
+  fontWeight: FontWeight.w600,
   color: Color(0xFFBDBDBD),
   fontFamily: "QuickSand",
   height: 1.4,

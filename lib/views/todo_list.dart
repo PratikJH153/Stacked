@@ -22,7 +22,6 @@ class _TodoListState extends State<TodoList> {
         ? NoTodoWidget(
             height: getHeight(context),
             image: "assets/images/todolist.png",
-            ismain: false,
             title: "No Todos added yet. Got to get yourself pumped up!",
           )
         : Consumer<TodoData>(

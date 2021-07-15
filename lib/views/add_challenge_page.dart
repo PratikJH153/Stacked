@@ -95,13 +95,42 @@ class _AddChallengePageState extends State<AddChallengePage> {
                 SizedBox(
                   height: 40,
                 ),
-                Container(
-                  margin: const EdgeInsets.only(left: 2),
-                  child: priorityWidget(
-                    title: "Challenge",
-                    color: kaccentColor,
-                    onTap: () {},
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(left: 2),
+                      child: priorityWidget(
+                        title: "Challenge",
+                        color: kaccentColor,
+                        onTap: () {},
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        await DatabaseService.instance.deleteAllChallenges();
+                        return Navigator.of(context).pushNamedAndRemoveUntil(
+                            Wrapper.id, (Route<dynamic> route) => false);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 18,
+                          vertical: 10,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.red.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Text(
+                          "Reset",
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 20,

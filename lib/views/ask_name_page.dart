@@ -19,7 +19,7 @@ class AskNamePage extends StatelessWidget {
     if (_form.validate()) {
       _form.save();
       DisplayName.setName(_nameController.text.trim());
-      TimeLinePref.setday(1);
+      TimeLinePref.setday(0);
       await DatabaseService.instance.insertDay();
       Navigator.of(context)
           .pushNamedAndRemoveUntil(Wrapper.id, (Route<dynamic> route) => false);
@@ -48,7 +48,7 @@ class AskNamePage extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        "Daily Todo",
+                        "Stacked",
                         style: kIntroTextStyle,
                       ),
                       SizedBox(
@@ -59,15 +59,14 @@ class AskNamePage extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: kDesTextStyle,
                       ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Flexible(
-                        child: Image.asset(
-                          "assets/images/info.png",
-                          width: width * 0.7,
-                        ),
-                      )
+                      // SizedBox(
+                      //   height: 30,
+                      // ),
+                      // Flexible(
+                      //   child: Image.asset(
+                      //     "assets/images/info.png",
+                      //   ),
+                      // )
                     ],
                   ),
                 ),
@@ -121,7 +120,7 @@ class AskNamePage extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            height: height * 0.24,
+                            height: height * 0.35,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

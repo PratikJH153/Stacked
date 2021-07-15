@@ -43,7 +43,6 @@ class _CalendarPageState extends State<CalendarPage> {
                           child: NoTodoWidget(
                             height: getHeight(context),
                             image: "assets/images/soon1.png",
-                            ismain: false,
                             title:
                                 "Daily Tracker Coming soon...\nTo make you Grow more!",
                           ),

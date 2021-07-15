@@ -4,13 +4,11 @@ import 'constants.dart';
 
 class NoTodoWidget extends StatelessWidget {
   final double height;
-  final bool ismain;
   final String title;
   final String image;
 
   NoTodoWidget({
     this.height,
-    this.ismain = true,
     this.title,
     this.image,
   });
@@ -21,8 +19,7 @@ class NoTodoWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
         margin: EdgeInsets.only(
-          bottom: ismain ? 0 : height * 0.16,
-          top: ismain ? height * 0.07 : 1,
+          bottom: height * 0.16,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,

@@ -79,158 +79,169 @@ class _ChallengePageState extends State<ChallengePage> {
               );
             }
             return snapshot.data.length > 0
-                ? ListView.builder(
-                    padding: EdgeInsets.only(
-                      top: 20,
-                      bottom: 100,
-                    ),
-                    itemBuilder: (context, index) {
-                      if (index == 0) {
-                        return Container();
-                      }
-
-                      final Challenge challenge = snapshot.data[index - 1];
-
-                      return GestureDetector(
-                        onDoubleTap: () async {
-                          await DatabaseService.instance
-                              .deleteChallenge(challenge.id);
-
-                          setState(() {});
-                        },
-                        child: Container(
-                          margin: EdgeInsets.all(10),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 15,
-                            vertical: 10,
+                ? Column(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                          padding: EdgeInsets.only(
+                            top: 20,
+                            bottom: 100,
                           ),
-                          decoration: containerDecoration,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  SizedBox(
-                                    width: getWidth(context) * 0.60,
-                                    child: Text(
-                                      challenge.title,
-                                      style: kTextFieldHintTextStyle.copyWith(
-                                        fontSize: 20,
-                                        color: challenge.isDone == 1
-                                            ? Colors.grey[700]
-                                            : Colors.white,
-                                        decoration: challenge.isDone == 1
-                                            ? TextDecoration.lineThrough
-                                            : TextDecoration.none,
-                                      ),
-                                    ),
-                                  ),
-                                  IconButton(
-                                    icon: Icon(CupertinoIcons.pencil_outline),
-                                    onPressed: () => Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) => AddChallengePage(
-                                          challenge: challenge,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  bottom: 10,
+                          itemBuilder: (context, index) {
+                            if (index == 0) {
+                              return Container();
+                            }
+
+                            final Challenge challenge =
+                                snapshot.data[index - 1];
+
+                            return GestureDetector(
+                              onDoubleTap: () async {
+                                await DatabaseService.instance
+                                    .deleteChallenge(challenge.id);
+
+                                setState(() {});
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 15,
+                                  vertical: 10,
                                 ),
-                                child: Text(
-                                  challenge.des,
-                                  style: kHintTextFieldTextStyle.copyWith(
-                                    fontSize: 14,
-                                    color: challenge.isDone == 1
-                                        ? Colors.grey[800]
-                                        : Colors.grey[700],
-                                  ),
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.bottomRight,
-                                child: RichText(
-                                  text: TextSpan(
-                                      style: kHintTextFieldTextStyle.copyWith(
-                                        fontSize: 13,
-                                        color: challenge.isDone == 1
-                                            ? Colors.grey[800]
-                                            : Colors.grey[700],
-                                      ),
+                                decoration: containerDecoration,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        TextSpan(
-                                          text:
-                                              "${challenge.completedDays}/${challenge.totalDays}",
-                                          style:
-                                              kTextFieldHintTextStyle.copyWith(
-                                            fontSize: 13,
-                                            color: challenge.isDone == 1
-                                                ? Colors.grey[800]
-                                                : kcanvasColor,
-                                            letterSpacing: 2,
+                                        SizedBox(
+                                          width: getWidth(context) * 0.60,
+                                          child: Text(
+                                            challenge.title,
+                                            style: kTextFieldHintTextStyle
+                                                .copyWith(
+                                              fontSize: 20,
+                                              color: challenge.isDone == 1
+                                                  ? Colors.grey[700]
+                                                  : Colors.white,
+                                              decoration: challenge.isDone == 1
+                                                  ? TextDecoration.lineThrough
+                                                  : TextDecoration.none,
+                                            ),
                                           ),
                                         ),
-                                        TextSpan(
-                                          text: " Days left",
+                                        IconButton(
+                                          icon: Icon(
+                                              CupertinoIcons.pencil_outline),
+                                          onPressed: () =>
+                                              Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  AddChallengePage(
+                                                challenge: challenge,
+                                              ),
+                                            ),
+                                          ),
                                         ),
-                                      ]),
-                                ),
-                              ),
-                              Container(
-                                child: LinearPercentIndicator(
-                                  backgroundColor: kprimaryColor,
-                                  linearGradient: LinearGradient(
-                                    colors: [
-                                      Color(0xFF4797ff),
-                                      Color(0xFF643dff),
-                                      Color(0xFFff7092),
-                                      Color(0xFFf5426c),
-                                    ],
-                                  ),
-                                  percent: challenge.completedDays /
-                                      challenge.totalDays,
-                                  lineHeight: 2,
-                                  animation: true,
-                                  animateFromLastPercent: true,
-                                  animationDuration: 1500,
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 5,
-                                    vertical: 15,
-                                  ),
-                                ),
-                              ),
-                              challenge.isDone == 0
-                                  ? Padding(
+                                      ],
+                                    ),
+                                    Padding(
                                       padding: const EdgeInsets.only(
-                                        top: 30.0,
                                         bottom: 10,
                                       ),
-                                      child: confirmationSlider(
-                                        height: 50,
-                                        onConfirmed: () =>
-                                            confirmHabit(challenge),
+                                      child: Text(
+                                        challenge.des,
+                                        style: kHintTextFieldTextStyle.copyWith(
+                                          fontSize: 14,
+                                          color: challenge.isDone == 1
+                                              ? Colors.grey[800]
+                                              : Colors.grey[700],
+                                        ),
                                       ),
-                                    )
-                                  : Container(
-                                      margin: EdgeInsets.only(bottom: 25),
                                     ),
-                            ],
-                          ),
+                                    Align(
+                                      alignment: Alignment.bottomRight,
+                                      child: RichText(
+                                        text: TextSpan(
+                                            style: kHintTextFieldTextStyle
+                                                .copyWith(
+                                              fontSize: 13,
+                                              color: challenge.isDone == 1
+                                                  ? Colors.grey[800]
+                                                  : Colors.grey[700],
+                                            ),
+                                            children: [
+                                              TextSpan(
+                                                text:
+                                                    "${challenge.completedDays}/${challenge.totalDays}",
+                                                style: kTextFieldHintTextStyle
+                                                    .copyWith(
+                                                  fontSize: 13,
+                                                  color: challenge.isDone == 1
+                                                      ? Colors.grey[800]
+                                                      : kcanvasColor,
+                                                  letterSpacing: 2,
+                                                ),
+                                              ),
+                                              TextSpan(
+                                                text: " Days left",
+                                              ),
+                                            ]),
+                                      ),
+                                    ),
+                                    Container(
+                                      child: LinearPercentIndicator(
+                                        backgroundColor: kprimaryColor,
+                                        linearGradient: LinearGradient(
+                                          colors: [
+                                            Color(0xFF4797ff),
+                                            Color(0xFF643dff),
+                                            Color(0xFFff7092),
+                                            Color(0xFFf5426c),
+                                          ],
+                                        ),
+                                        percent: challenge.completedDays /
+                                            challenge.totalDays,
+                                        lineHeight: 2,
+                                        animation: true,
+                                        animateFromLastPercent: true,
+                                        animationDuration: 1500,
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 5,
+                                          vertical: 15,
+                                        ),
+                                      ),
+                                    ),
+                                    challenge.isDone == 0
+                                        ? Padding(
+                                            padding: const EdgeInsets.only(
+                                              top: 30.0,
+                                              bottom: 10,
+                                            ),
+                                            child: confirmationSlider(
+                                              height: 50,
+                                              onConfirmed: () =>
+                                                  confirmHabit(challenge),
+                                            ),
+                                          )
+                                        : Container(
+                                            margin: EdgeInsets.only(bottom: 25),
+                                          ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                          itemCount: 1 + snapshot.data.length,
                         ),
-                      );
-                    },
-                    itemCount: 1 + snapshot.data.length,
+                      ),
+                    ],
                   )
                 : NoTodoWidget(
                     height: getHeight(context),
                     image: "assets/images/soon1.png",
-                    ismain: false,
                     title:
                         "No Challenges added yet!\nAdd it to make a get to the right track.",
                   );
