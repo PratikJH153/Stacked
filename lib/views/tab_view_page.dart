@@ -22,12 +22,12 @@ class TabViewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 5,
       child: SafeArea(
         child: Scaffold(
           primary: true,
           appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(135),
+            preferredSize: const Size.fromHeight(136),
             child: AppBar(
               backgroundColor: Colors.white.withOpacity(0.06),
               flexibleSpace: Padding(
@@ -61,7 +61,7 @@ class TabViewPage extends StatelessWidget {
                       icon: Icon(
                         CupertinoIcons.info,
                         size: 20,
-                        color: Colors.grey[700],
+                        color: const Color(0xFF616161),
                       ),
                       onPressed: () => Navigator.of(context).push(
                         MaterialPageRoute(
@@ -72,7 +72,7 @@ class TabViewPage extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                      icon: Icon(CupertinoIcons.square_stack_3d_up),
+                      icon: Icon(CupertinoIcons.layers_alt),
                       onPressed: () =>
                           Navigator.pushNamed(context, TodoListPage.id),
                     )
@@ -82,19 +82,21 @@ class TabViewPage extends StatelessWidget {
               bottom: TabBar(
                 indicatorColor: kaccentColor,
                 tabs: const [
-                  Tab(icon: Icon(CupertinoIcons.rocket)),
-                  Tab(icon: Icon(CupertinoIcons.timer)),
-                  Tab(icon: Icon(CupertinoIcons.calendar)),
-                  Tab(icon: Icon(CupertinoIcons.loop)),
+                  const Tab(icon: Icon(CupertinoIcons.rocket)),
+                  const Tab(icon: Icon(CupertinoIcons.timer)),
+                  const Tab(icon: Icon(CupertinoIcons.bolt_horizontal)),
+                  const Tab(icon: Icon(CupertinoIcons.calendar)),
+                  const Tab(icon: Icon(CupertinoIcons.loop)),
                 ],
               ),
             ),
           ),
           body: TabBarView(
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             children: [
               HomePage(),
               TimelinePage(),
+              Container(),
               CalendarPage(),
               ChallengePage(),
             ],

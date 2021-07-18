@@ -67,10 +67,6 @@ class TodoData extends ChangeNotifier {
 
   void sortTodo(List<Todo> result) {
     result.sort((todoA, todoB) => todoA.status.compareTo(todoB.status));
-
-    // todoList.sort((todoA, todoB) =>
-    //     _priorities[todoB.priority].compareTo(_priorities[todoA.priority]));
-
     notifyListeners();
   }
 
@@ -122,7 +118,7 @@ class TodoData extends ChangeNotifier {
     } else {
       orders.remove(todo.id);
     }
-    updateOder(orders);
+    // updateOder(orders);
     percentage;
     isCompleted;
     sortTodo(todoList);

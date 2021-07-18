@@ -1,6 +1,7 @@
 import 'package:dailytodo/database/database.dart';
 import 'package:dailytodo/models/challenge.dart';
 import 'package:dailytodo/views/wrapper.dart';
+import 'package:dailytodo/widgets/alert_dialog.dart';
 import 'package:dailytodo/widgets/app_bar.dart';
 import 'package:dailytodo/widgets/constants.dart';
 import 'package:dailytodo/widgets/priority_widget.dart';
@@ -108,9 +109,21 @@ class _AddChallengePageState extends State<AddChallengePage> {
                     ),
                     GestureDetector(
                       onTap: () async {
-                        await DatabaseService.instance.deleteAllChallenges();
-                        return Navigator.of(context).pushNamedAndRemoveUntil(
-                            Wrapper.id, (Route<dynamic> route) => false);
+                        showCupertinoDialog(
+                          context: context,
+                          builder: (context) {
+                            return alertDialog(
+                              context: context,
+                              isYes: () {
+                                DatabaseService.instance.deleteAllChallenges();
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                    Wrapper.id,
+                                    (Route<dynamic> route) => false);
+                              },
+                              title: "Challenges",
+                            );
+                          },
+                        );
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(

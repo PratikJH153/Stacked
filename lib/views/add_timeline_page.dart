@@ -1,6 +1,7 @@
 import 'package:dailytodo/database/database.dart';
 import 'package:dailytodo/models/timeline.dart';
 import 'package:dailytodo/views/wrapper.dart';
+import 'package:dailytodo/widgets/alert_dialog.dart';
 import 'package:dailytodo/widgets/app_bar.dart';
 import 'package:dailytodo/widgets/constants.dart';
 import 'package:dailytodo/widgets/floatingactionButton.dart';
@@ -108,10 +109,22 @@ class _AddTimeLinePageState extends State<AddTimeLinePage> {
                     ),
                     GestureDetector(
                       onTap: () async {
-                        await DatabaseService.instance.deleteAllDays();
-                        TimeLinePref.setday(0);
-                        return Navigator.of(context).pushNamedAndRemoveUntil(
-                            Wrapper.id, (Route<dynamic> route) => false);
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return alertDialog(
+                              title: "Timelines",
+                              context: context,
+                              isYes: () async {
+                                await DatabaseService.instance.deleteAllDays();
+                                TimeLinePref.setday(0);
+                                return Navigator.of(context)
+                                    .pushNamedAndRemoveUntil(Wrapper.id,
+                                        (Route<dynamic> route) => false);
+                              },
+                            );
+                          },
+                        );
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(

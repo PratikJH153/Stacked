@@ -11,7 +11,6 @@ class OrderData {
 
     List<int> orderList =
         prefs.getStringList('order').map((e) => int.parse(e)).toList();
-    print("ORDER WHILE CALLING GETORDER IN ORDER DATA $orderList");
     return orderList;
   }
 }

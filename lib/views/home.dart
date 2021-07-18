@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Container(
                   alignment: Alignment.center,
-                  margin: EdgeInsets.only(top: 20),
+                  margin: const EdgeInsets.only(top: 20),
                   child: ConfettiWidget(
                     confettiController: _controllerCenter,
                     blastDirectionality: BlastDirectionality
@@ -128,12 +128,12 @@ class _HomePageState extends State<HomePage> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Container(
-                                      padding: EdgeInsets.all(20),
+                                      padding: const EdgeInsets.all(20),
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         color: Theme.of(context)
                                             .scaffoldBackgroundColor,
-                                        boxShadow: [
+                                        boxShadow: const [
                                           BoxShadow(
                                               color: Colors.black38,
                                               offset: Offset(6.0, 6.0),
@@ -257,10 +257,14 @@ class _HomePageState extends State<HomePage> {
                               );
                             },
                           )
-                        : NoTodoWidget(
-                            height: height,
-                            title: "Pump yourself up!\nAdd Tasks to Grow More!",
-                            image: "assets/images/notodo.png",
+                        : Container(
+                            margin: EdgeInsets.only(top: height * 0.05),
+                            child: NoTodoWidget(
+                              height: height,
+                              title:
+                                  "Pump yourself up!\nAdd Tasks to Grow More!",
+                              image: "assets/images/notodo.png",
+                            ),
                           ),
                   ],
                 ),
