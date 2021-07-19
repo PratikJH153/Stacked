@@ -190,7 +190,7 @@ class _AddChallengePageState extends State<AddChallengePage> {
                                         child: Text(
                                           "${index + 1}",
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.white,
                                           ),
                                         ),

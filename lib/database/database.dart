@@ -1,5 +1,6 @@
 import 'package:dailytodo/models/challenge.dart';
 import 'package:dailytodo/models/day.dart';
+import 'package:dailytodo/models/goal.dart';
 import 'package:dailytodo/models/timeline.dart';
 
 import '../models/todo.dart';
@@ -34,6 +35,10 @@ class DatabaseService {
   String dayTable = 'day_table';
   String colValue = 'value';
 
+  String goalsTable = 'goals_table';
+  String colStartDate = 'startDate';
+  String colEndDate = 'endDate';
+
   Future<Database> get database async {
     if (_db == null) {
       _db = await initDB();
@@ -57,6 +62,8 @@ class DatabaseService {
         'CREATE TABLE $challengeTable($colId INTEGER PRIMARY KEY AUTOINCREMENT,$colTitle TEXT,$colDes TEXT,$colIsDone INTEGER,$colTotalDays INTEGER,$colCompletedDays INTEGER, $colDoneDate TEXT)');
     await db.execute(
         'CREATE TABLE $dayTable($colId INTEGER PRIMARY KEY AUTOINCREMENT,$colDay INTEGER, $colValue TEXT)');
+    await db.execute(
+        'CREATE TABLE $goalsTable($colId INTEGER PRIMARY KEY AUTOINCREMENT,$colTitle TEXT,$colPriority TEXT,$colStartDate TEXT, $colEndDate TEXT)');
   }
 
   Future<List<Map<String, dynamic>>> getMapLists() async {
@@ -236,5 +243,55 @@ class DatabaseService {
       dayLists.add(Day.fromMap(day));
     });
     return dayLists;
+  }
+
+  Future<int> insertGoal(Goal goal) async {
+    Database db = await this.database;
+
+    final int result = await db.insert(goalsTable, goal.toMap());
+    return result;
+  }
+
+  Future<int> deleteGoal(int id) async {
+    Database db = await this.database;
+    final int result = await db.delete(
+      goalsTable,
+      where: '$colId = ?',
+      whereArgs: [id],
+    );
+    return result;
+  }
+
+  Future<int> updateGoal(Goal goal) async {
+    Database db = await this.database;
+    final int result = await db.update(
+      goalsTable,
+      goal.toMap(),
+      where: '$colId = ?',
+      whereArgs: [goal.id],
+    );
+    return result;
+  }
+
+  Future<int> deleteAllGoals() async {
+    Database db = await this.database;
+    final int result = await db.delete(goalsTable);
+    return result;
+  }
+
+  Future<List<Map<String, dynamic>>> getGoalsMap() async {
+    Database db = await this.database;
+    final List<Map<String, dynamic>> result = await db.query(goalsTable);
+    return result;
+  }
+
+  Future<List<Goal>> getGoalsList() async {
+    final List<Map<String, dynamic>> mapLists = await getGoalsMap();
+    final List<Goal> goalsList = [];
+    mapLists.forEach((goal) {
+      goalsList.add(Goal.fromMap(goal));
+    });
+    goalsList.sort((goalA, goalB) => goalA.endDate.compareTo(goalB.endDate));
+    return goalsList;
   }
 }

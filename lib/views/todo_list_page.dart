@@ -22,7 +22,11 @@ class TodoListPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: Container(
-          padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+          padding: const EdgeInsets.only(
+            left: 20,
+            right: 20,
+            top: 20,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -31,7 +35,7 @@ class TodoListPage extends StatelessWidget {
                 children: [
                   IconButton(
                     iconSize: 25,
-                    icon: Icon(CupertinoIcons.arrow_turn_up_left),
+                    icon: const Icon(CupertinoIcons.arrow_turn_up_left),
                     onPressed: () => Navigator.pop(context),
                   ),
                   Padding(
@@ -68,7 +72,7 @@ class TodoListPage extends StatelessWidget {
                   TextSpan(
                       text:
                           "${Provider.of<TodoData>(context).completedTasks}/${Provider.of<TodoData>(context).todoCount}",
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontFamily: 'Ubuntu',
                         fontSize: 20,
@@ -82,10 +86,10 @@ class TodoListPage extends StatelessWidget {
               LinearPercentIndicator(
                 backgroundColor: kprimaryColor,
                 linearGradient: LinearGradient(colors: const [
-                  Color(0xFF4797ff),
-                  Color(0xFF643dff),
-                  Color(0xFFff7092),
-                  Color(0xFFf5426c),
+                  const Color(0xFF4797ff),
+                  const Color(0xFF643dff),
+                  const Color(0xFFff7092),
+                  const Color(0xFFf5426c),
                 ]),
                 percent: Provider.of<TodoData>(context).percentage != double.nan
                     ? Provider.of<TodoData>(context).percentage

@@ -135,15 +135,17 @@ class _HomePageState extends State<HomePage> {
                                             .scaffoldBackgroundColor,
                                         boxShadow: const [
                                           BoxShadow(
-                                              color: Colors.black38,
-                                              offset: Offset(6.0, 6.0),
-                                              blurRadius: 15.0,
-                                              spreadRadius: 3.0),
+                                            color: Colors.black38,
+                                            offset: Offset(6.0, 6.0),
+                                            blurRadius: 15.0,
+                                            spreadRadius: 3.0,
+                                          ),
                                           BoxShadow(
-                                              color: Colors.black12,
-                                              offset: Offset(-6.0, -6.0),
-                                              blurRadius: 15.0,
-                                              spreadRadius: 3.0),
+                                            color: Colors.black12,
+                                            offset: Offset(-6.0, -6.0),
+                                            blurRadius: 15.0,
+                                            spreadRadius: 3.0,
+                                          ),
                                         ],
                                       ),
                                       child: CircularPercentIndicator(
@@ -199,7 +201,8 @@ class _HomePageState extends State<HomePage> {
                                         circularStrokeCap:
                                             CircularStrokeCap.round,
                                         backgroundColor: kprimaryColor,
-                                        linearGradient: LinearGradient(colors: [
+                                        linearGradient:
+                                            LinearGradient(colors: const [
                                           Color(0xFF4797ff),
                                           Color(0xFF643dff),
                                           Color(0xFFff7092),

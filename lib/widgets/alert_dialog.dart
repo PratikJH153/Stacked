@@ -12,8 +12,8 @@ AlertDialog alertDialog({
     title: Text(title),
     content: Text(
       "Are you sure to reset every $title?",
-      style: TextStyle(
-        color: Colors.grey[400],
+      style: const TextStyle(
+        color: Color(0xFFBDBDBD),
         fontWeight: FontWeight.w400,
         height: 1.5,
         fontSize: 16,
@@ -24,8 +24,8 @@ AlertDialog alertDialog({
         onPressed: () => isYes(),
         child: Text(
           "Yes",
-          style: TextStyle(
-            color: Colors.red[400],
+          style: const TextStyle(
+            color: Color(0xFFEF5350),
           ),
         ),
       ),

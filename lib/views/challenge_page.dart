@@ -67,7 +67,7 @@ class _ChallengePageState extends State<ChallengePage> {
         location: AddChallengePage.id,
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: 20,
         ),
         child: FutureBuilder(
@@ -83,7 +83,7 @@ class _ChallengePageState extends State<ChallengePage> {
                     children: [
                       Expanded(
                         child: ListView.builder(
-                          padding: EdgeInsets.only(
+                          padding: const EdgeInsets.only(
                             top: 20,
                             bottom: 100,
                           ),
@@ -103,8 +103,8 @@ class _ChallengePageState extends State<ChallengePage> {
                                 setState(() {});
                               },
                               child: Container(
-                                margin: EdgeInsets.all(10),
-                                padding: EdgeInsets.symmetric(
+                                margin: const EdgeInsets.all(10),
+                                padding: const EdgeInsets.symmetric(
                                   horizontal: 15,
                                   vertical: 10,
                                 ),
@@ -195,7 +195,7 @@ class _ChallengePageState extends State<ChallengePage> {
                                       child: LinearPercentIndicator(
                                         backgroundColor: kprimaryColor,
                                         linearGradient: LinearGradient(
-                                          colors: [
+                                          colors: const [
                                             Color(0xFF4797ff),
                                             Color(0xFF643dff),
                                             Color(0xFFff7092),
@@ -208,7 +208,7 @@ class _ChallengePageState extends State<ChallengePage> {
                                         animation: true,
                                         animateFromLastPercent: true,
                                         animationDuration: 1500,
-                                        padding: EdgeInsets.symmetric(
+                                        padding: const EdgeInsets.symmetric(
                                           horizontal: 5,
                                           vertical: 15,
                                         ),
@@ -227,7 +227,8 @@ class _ChallengePageState extends State<ChallengePage> {
                                             ),
                                           )
                                         : Container(
-                                            margin: EdgeInsets.only(bottom: 25),
+                                            margin: const EdgeInsets.only(
+                                                bottom: 25),
                                           ),
                                   ],
                                 ),

@@ -119,7 +119,7 @@ class TimelinePage extends StatelessWidget {
                                     left: 10,
                                   ),
                                   decoration: containerDecoration,
-                                  padding: EdgeInsets.all(14),
+                                  padding: const EdgeInsets.all(14),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,

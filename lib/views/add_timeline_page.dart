@@ -137,7 +137,7 @@ class _AddTimeLinePageState extends State<AddTimeLinePage> {
                         ),
                         child: Text(
                           "Reset",
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.red,
                             fontWeight: FontWeight.bold,
                           ),

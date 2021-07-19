@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 double getHeight(BuildContext context) {
   return MediaQuery.of(context).size.height;
@@ -50,6 +51,9 @@ const Map priorities = {
   'Medium': Color(0xFFFFA726),
   'Hard': Color(0xFFEF5350),
 };
+
+final formattedString = DateFormat('MMM dd yyyy');
+final goalDateString = DateFormat('dd MMMM yyyy');
 
 final containerDecoration = BoxDecoration(
   gradient: LinearGradient(

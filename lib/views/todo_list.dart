@@ -79,17 +79,16 @@ class _TodoListState extends State<TodoList> {
                             horizontal: 15, vertical: 5),
                         decoration: BoxDecoration(
                           color: kprimaryColor,
-                          // borderRadius: BorderRadius.circular(10),
-                          border: Border(
-                            left: BorderSide(
-                              color: todo.status == 1
-                                  ? Colors.grey
-                                  : priorities[todo.priority],
-                              width: 3,
-                            ),
-                          ),
+                          borderRadius: BorderRadius.circular(10),
+                          gradient: new LinearGradient(stops: [
+                            0.02,
+                            0.02
+                          ], colors: [
+                            priorities[todo.priority],
+                            kprimaryColor
+                          ]),
                         ),
-                        margin: EdgeInsets.only(top: 20),
+                        margin: EdgeInsets.only(top: 15),
                         child: ListTile(
                           key: ValueKey(todo),
                           onTap: () async {
