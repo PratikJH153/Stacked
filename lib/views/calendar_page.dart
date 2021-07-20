@@ -64,20 +64,12 @@ class _CalendarPageState extends State<CalendarPage> {
                           return TapDayWidget(
                             index: day.day,
                             value: day.value,
-                            notDone: () async {
-                              setState(() {
-                                if (day.value == "null") {
-                                  day.value = "false";
-                                } else {
-                                  day.value = "null";
-                                }
-                              });
-                              await DatabaseService.instance.updateDay(day);
-                            },
                             doneFunc: () async {
                               setState(() {
                                 if (day.value == "null") {
                                   day.value = "true";
+                                } else if (day.value == "true") {
+                                  day.value = "false";
                                 } else {
                                   day.value = "null";
                                 }

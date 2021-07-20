@@ -5,20 +5,17 @@ class TapDayWidget extends StatelessWidget {
   final String value;
   final int index;
   final Function doneFunc;
-  final Function notDone;
 
   TapDayWidget({
     this.value,
     this.index,
     this.doneFunc,
-    this.notDone,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: doneFunc,
-      onLongPress: notDone,
       child: Container(
         alignment: Alignment.center,
         margin: const EdgeInsets.all(10),

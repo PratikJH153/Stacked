@@ -1,17 +1,14 @@
 import 'package:dailytodo/database/database.dart';
 import 'package:dailytodo/models/goal.dart';
-import 'package:dailytodo/views/tab_view_page.dart';
 import 'package:dailytodo/views/wrapper.dart';
 import 'package:dailytodo/widgets/app_bar.dart';
 import 'package:dailytodo/widgets/constants.dart';
 import 'package:dailytodo/widgets/date_textfield.dart';
-import 'package:dailytodo/widgets/floatingactionButton.dart';
 import 'package:dailytodo/widgets/priority_widget.dart';
 import 'package:dailytodo/widgets/snackbar_widget.dart';
 import 'package:dailytodo/widgets/textFields.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class AddPlannedGoalsPage extends StatefulWidget {
   static const id = "/addGoals";
@@ -25,8 +22,8 @@ class AddPlannedGoalsPage extends StatefulWidget {
 
 class _AddPlannedGoalsPageState extends State<AddPlannedGoalsPage> {
   String _priority = "Easy";
-  DateTime _startDate;
-  DateTime _endDate;
+  DateTime _startDate = DateTime.now();
+  DateTime _endDate = DateTime.now();
 
   final TextEditingController _startDateController = TextEditingController();
   final TextEditingController _endDateController = TextEditingController();
@@ -84,7 +81,9 @@ class _AddPlannedGoalsPageState extends State<AddPlannedGoalsPage> {
       _endDateController.text = formattedString.format(_endDate);
     } else {
       _startDate = DateTime.now();
+      _endDate = DateTime.now();
       _startDateController.text = formattedString.format(_startDate);
+      _endDateController.text = formattedString.format(_endDate);
     }
   }
 

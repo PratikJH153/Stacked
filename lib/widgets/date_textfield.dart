@@ -19,7 +19,7 @@ Widget dateTextField({
         final dateTime = DateTime.now();
         final pickedDate = await showDatePicker(
           context: context,
-          initialDate: dateTime,
+          initialDate: time,
           firstDate: DateTime(dateTime.year),
           lastDate: DateTime(dateTime.year + 5),
         );

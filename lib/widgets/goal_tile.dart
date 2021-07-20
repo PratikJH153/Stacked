@@ -77,7 +77,8 @@ Widget goalTile({
               text: TextSpan(
                 children: [
                   TextSpan(
-                    text: "${endDate.difference(startDate).inDays} ",
+                    text:
+                        "${endDate.difference(startDate.subtract(Duration(days: 1))).inDays} ",
                     style: TextStyle(
                       fontSize: 12,
                       letterSpacing: 1.1,
