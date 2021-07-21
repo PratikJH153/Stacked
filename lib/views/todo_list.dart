@@ -81,10 +81,12 @@ class _TodoListState extends State<TodoList> {
                           color: kprimaryColor,
                           borderRadius: BorderRadius.circular(10),
                           gradient: new LinearGradient(stops: [
-                            0.02,
-                            0.02
+                            0.015,
+                            0.015
                           ], colors: [
-                            priorities[todo.priority],
+                            todo.status == 1
+                                ? Colors.grey[700]
+                                : priorities[todo.priority],
                             kprimaryColor
                           ]),
                         ),

@@ -1,6 +1,9 @@
+import 'package:dailytodo/database/database.dart';
 import 'package:dailytodo/helper/todo_data.dart';
 import 'package:dailytodo/views/add_todo_page.dart';
 import 'package:dailytodo/views/todo_list.dart';
+import 'package:dailytodo/views/wrapper.dart';
+import 'package:dailytodo/widgets/alert_dialog.dart';
 import 'package:dailytodo/widgets/constants.dart';
 import 'package:dailytodo/widgets/floatingactionButton.dart';
 import 'package:flutter/cupertino.dart';
@@ -50,9 +53,23 @@ class TodoListPage extends StatelessWidget {
                   ),
                   Spacer(),
                   TextButton(
+                    // ! ADD CHECK DIALOG HERE
                     onPressed: () async {
-                      await Provider.of<TodoData>(context, listen: false)
-                          .clearData();
+                      showCupertinoDialog(
+                        context: context,
+                        builder: (context) {
+                          return alertDialog(
+                            context: context,
+                            isYes: () async {
+                              await Provider.of<TodoData>(context,
+                                      listen: false)
+                                  .clearData();
+                              Navigator.pop(context);
+                            },
+                            title: "Challenges",
+                          );
+                        },
+                      );
                     },
                     child: Text("Clear all"),
                     style: TextButton.styleFrom(

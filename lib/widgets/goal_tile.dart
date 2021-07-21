@@ -43,11 +43,14 @@ Widget goalTile({
         color: kprimaryColor,
         borderRadius: const BorderRadius.all(Radius.circular(10)),
         gradient: new LinearGradient(
-          stops: const [0.02, 0.02],
+          stops: const [
+            0.02,
+            0.02,
+          ],
           colors: [priorities[goal.priority], kprimaryColor],
         ),
       ),
-      margin: const EdgeInsets.only(top: 20),
+      margin: const EdgeInsets.only(top: 25),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -78,7 +81,7 @@ Widget goalTile({
                 children: [
                   TextSpan(
                     text:
-                        "${endDate.difference(startDate.subtract(Duration(days: 1))).inDays} ",
+                        "${endDate.difference(DateTime.now().subtract(Duration(days: 1))).inDays} ",
                     style: TextStyle(
                       fontSize: 12,
                       letterSpacing: 1.1,
