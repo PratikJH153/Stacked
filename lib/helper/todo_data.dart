@@ -118,7 +118,7 @@ class TodoData extends ChangeNotifier {
     } else {
       orders.remove(todo.id);
     }
-    // updateOder(orders);
+    updateOder(orders);
     percentage;
     isCompleted;
     sortTodo(todoList);
