@@ -1,4 +1,4 @@
-# dailytodo
+# Daily Todo
 
 A new Flutter project.
 
